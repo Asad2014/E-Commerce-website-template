@@ -65,7 +65,7 @@ const UpperHeader = () => {
 
           {/* Mobile Menu Button */}
           <button className="md:hidden" onClick={toggleMenu}>
-            <MdMenu size={30} />
+            <MdMenu size={25}/>
           </button>
         </div>
       </header>
