@@ -1,11 +1,19 @@
 
-import React from 'react';
+"use client";
+import React, { useState } from 'react';
 import { IoSearchOutline } from "react-icons/io5";
 import { CiHeart } from "react-icons/ci";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import Link from 'next/link';
+import { MdMenu } from "react-icons/md";
 
 const UpperHeader = () => {
+  const [isOpen, setIsOpen] = useState(false); 
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <>
       {/* Top Announcement Bar */}
@@ -31,12 +39,14 @@ const UpperHeader = () => {
         </div>
 
         {/* Navigation Links */}
-        <nav className="hidden md:flex space-x-6">
-          <Link href="/" className="text-sm text-black hover:text-gray-700">Home</Link>
-          <Link href="/Contact" className="text-sm text-black hover:text-gray-700">Contact</Link>
-          <Link href="/About" className="text-sm text-black hover:text-gray-700">About</Link>
-          <Link href="/Signup" className="text-sm text-black hover:text-gray-700">Sign Up</Link>
-        </nav>
+        <div className="flex justify-end items-center px-4 py-2">
+          <nav className="hidden md:flex space-x-6">
+            <Link href="/" className="text-sm text-black hover:text-gray-700">Home</Link>
+            <Link href="/Contact" className="text-sm text-black hover:text-gray-700">Contact</Link>
+            <Link href="/About" className="text-sm text-black hover:text-gray-700">About</Link>
+            <Link href="/Signup" className="text-sm text-black hover:text-gray-700">Sign Up</Link>
+          </nav>
+        </div>
 
         {/* Icons and Search */}
         <div className="flex items-center space-x-4 w-full md:w-auto justify-center md:justify-end">
@@ -52,11 +62,27 @@ const UpperHeader = () => {
           <Link href="/Cart">
             <MdOutlineShoppingCart className="text-black text-xl cursor-pointer" />
           </Link>
+
+          {/* Mobile Menu Button */}
+          <button className="md:hidden" onClick={toggleMenu}>
+            <MdMenu size={30} />
+          </button>
         </div>
       </header>
+
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div className="md:hidden bg-black text-white py-4 px-6">
+          <nav className="space-y-4">
+            <Link href="/" className="block text-sm" onClick={toggleMenu}>Home</Link>
+            <Link href="/Contact" className="block text-sm" onClick={toggleMenu}>Contact</Link>
+            <Link href="/About" className="block text-sm" onClick={toggleMenu}>About</Link>
+            <Link href="/Signup" className="block text-sm" onClick={toggleMenu}>Sign Up</Link>
+          </nav>
+        </div>
+      )}
     </>
   );
 };
 
 export default UpperHeader;
-
